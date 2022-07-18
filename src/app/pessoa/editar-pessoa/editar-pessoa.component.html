@@ -1,0 +1,101 @@
+<h1>Editar Pessoa</h1>
+
+<div class="well">
+  <form #formPessoa="ngForm">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nome"
+        placeholder="Nome"
+        name="nome"
+        minLength="2"
+        required
+        [(ngModel)]="pessoa.nome"
+        #nome="ngModel"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="nome.errors && (nome.dirty || nome.touched)"
+      >
+        <div [hidden]="!nome.errors?.['required']">
+          Digite o nome da pessoa.
+        </div>
+        <div [hidden]="!nome.errors?.['minLength']">
+          O nome deve conter ao menos 2 caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="nome">Idade</label>
+      <input
+        type="text"
+        class="form-control"
+        id="idade"
+        placeholder="idade"
+        name="idade"
+        minLength="2"
+        required
+        numerico
+        minimoValidator
+        valorMinimo="18"
+        [(ngModel)]="pessoa.idade"
+        #idade="ngModel"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="nome.errors && (nome.dirty || nome.touched)"
+      >
+        <div [hidden]="!nome.errors?.['required']">
+          Digite a idade da pessoa.
+        </div>
+        <div [hidden]="!idade.errors?.['minimo']">
+          A idade informada não é permitida
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="nome">Data de Nacimento</label>
+      <input
+        type="text"
+        class="form-control"
+        id="data"
+        placeholder="data"
+        name="data"
+        minLength="2"
+        numerico
+        mask="d0/M0/0000"
+        minimoValidator
+        valorMinimo="18"
+        required
+        [(ngModel)]="pessoa.dataNascimento"
+        #dataNascimento="ngModel"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="nome.errors && (nome.dirty || nome.touched)"
+      >
+        <div [hidden]="!dataNascimento.errors?.['required']">
+          Digite a dataNascimento da pessoa.
+        </div>
+        <div [hidden]="!dataNascimento.errors?.['minimo']">
+          A idade informada não é permitida
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="atualizar()"
+        [disabled]="!formPessoa.form.valid"
+      >
+        <i class="fa fa-save">Atualizar</i>
+      </button>
+      <a class="btn btn-secondary" [routerLink]="['/pessoas']"
+        ><i class="fa fa-arrow-left"></i> Voltar
+      </a>
+    </div>
+  </form>
+</div>
