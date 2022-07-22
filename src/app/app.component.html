@@ -6,16 +6,16 @@
     <div class="navbar-collapse collapsed" id="navbarContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#" routerLink="/pessoas">Pessoas</a>
+          <a class="nav-link" href="#" routerLink="/pessoas/listar">Pessoas</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" routerLink="/enderecos">Enderecos</a>
+        <li class="nav-item" *ngIf="usuarioLogado.perfil == 'ADMIN' || usuarioLogado.perfil==='GERENTE'">
+          <a class="nav-link" href="#" routerLink="/enderecos/listar">Enderecos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" routerLink="/cidades">Cidades</a>
+        <li class="nav-item" *ngIf="usuarioLogado.perfil==='GERENTE'">
+          <a class="nav-link" href="#" routerLink="/cidades/listar">Cidades</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" routerLink="/estados">Estados</a>
+        <li class="nav-item" *ngIf="usuarioLogado.perfil == 'ADMIN' || usuarioLogado.perfil==='FUNC'">
+          <a class="nav-link" href="#" routerLink="/estados/listar">Estados</a>
         </li>
         <li class="nav-item" ngbDropdown>
           <a
@@ -36,16 +36,26 @@
             <li class="dropdown-item" ngbDropdownItem>
               <a href="#" routerLink="/pessoas">Pessoas</a>
             </li>
-            <li class="dropdown-item" ngbDropdownItem>
+            <li *ngIf="usuarioLogado.perfil == 'ADMIN' || usuarioLogado.perfil==='GERENTE'" class="dropdown-item" ngbDropdownItem>
               <a href="#" routerLink="/enderecos">Enderecos</a>
             </li>
-            <li class="dropdown-item" ngbDropdownItem>
+            <li *ngIf="usuarioLogado.perfil==='GERENTE'" class="dropdown-item" ngbDropdownItem>
               <a href="#" routerLink="/cidades">Cidades</a>
             </li>
-            <li class="dropdown-item" ngbDropdownItem>
+            <li *ngIf="usuarioLogado.perfil == 'ADMIN' || usuarioLogado.perfil==='FUNC'" class="dropdown-item" ngbDropdownItem>
               <a href="#" routerLink="/estados">Estados</a>
             </li>
           </div>
+        </li>
+      </ul>
+      <ul *ngIf="usuarioLogado" class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-item" href="#" (click)="logout()">Logout</a>
+
+        </li>
+        <li class="nav-item">
+          <p class="navbar-text mb-0 text-white"><i class="fa fa-user"></i>{{usuarioLogado.nome}}</p>
+          
         </li>
       </ul>
     </div>

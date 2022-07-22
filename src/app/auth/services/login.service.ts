@@ -17,4 +17,28 @@ export class LoginService {
   public set usuarioLogado(usuario: Usuario) {
     localStorage[LS_CHAVE] = JSON.stringify(usuario);
   }
-}    
+  logout() {
+    delete localStorage[LS_CHAVE];
+  }
+
+  login(login: Login): Observable<Usuario | null> {
+    let usu = new Usuario(1, "Razer-Func", login.login, login.senha, "FUNC");
+
+    if (login.login == login.senha) {
+      if (login.login == "admin") {
+        usu = new Usuario(1, "Razer-Admin", login.login, login.senha, "ADMIN");
+      } else if (login.login == "gerente") {
+        usu = new Usuario(
+          1,
+          "Razer-Gerente",
+          login.login,
+          login.senha,
+          "GERENTE"
+        );
+      }
+      return of(usu);
+    } else {
+      return of(null);
+    }
+  }
+}
