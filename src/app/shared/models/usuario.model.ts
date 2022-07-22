@@ -1,10 +1,9 @@
 export class Usuario {
-constructor(
+  constructor(
     public id?: number,
     public nome?: string,
     public login?: string,
     public senha?: string,
-    public perfil?: string,
-){}
+    public perfil?: string
+  ) {}
 }
-

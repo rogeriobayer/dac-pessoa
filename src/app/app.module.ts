@@ -16,6 +16,8 @@ import { EstadoModule } from './estado/estado.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared';
 import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @NgModule({
   declarations: [
@@ -28,12 +30,14 @@ import { HomeComponent } from './home/home.component';
     PessoaModule,
     EnderecoModule,
     CidadeModule,
+    UsuarioModule,
     EstadoModule,
     FormsModule,
     AuthModule,
     SharedModule,
     NgbModule,
-    NgSelectModule
+    NgSelectModule,
+    HttpClientModule
   ],
   providers: [PessoaService, EnderecoService, CidadeService],
   bootstrap: [AppComponent]
